@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday </title>
+
+<style>
+body{
+    margin:0;
+    font-family:"Segoe UI", sans-serif;
+    background: linear-gradient(135deg,#ff758c,#ff7eb3,#fad0c4);
+    background-size:300% 300%;
+    animation:bgMove 10s ease infinite;
+    color:white;
+    text-align:center;
+    overflow-x:hidden;
+}
+
+@keyframes bgMove{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+/* glass card */
+.card{
+    background:rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    border-radius:25px;
+    padding:40px;
+    max-width:900px;
+    margin:40px auto;
+    box-shadow:0 20px 50px rgba(0,0,0,0.25);
+}
+
+/* PASSWORD SCREEN */
+#lockScreen{
+    position:fixed;
+    inset:0;
+    background:linear-gradient(120deg,#ff758c,#ff7eb3);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    z-index:9999;
+}
+
+#lockScreen input{
+    padding:14px;
+    border-radius:12px;
+    border:none;
+    margin-top:10px;
+    font-size:18px;
+}
+
+button{
+    padding:12px 22px;
+    border:none;
+    border-radius:12px;
+    font-size:16px;
+    cursor:pointer;
+    background:white;
+    color:#ff4d88;
+    font-weight:bold;
+    margin-top:10px;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.08);
+}
+
+nav{
+    position:fixed;
+    width:100%;
+    top:0;
+    background:rgba(0,0,0,0.3);
+    padding:18px;
+    z-index:10;
+}
+
+nav a{
+    margin:15px;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+section{
+    min-height:100vh;
+    padding:120px 30px;
+}
+
+h1{
+    font-size:3em;
+}
+
+.reason{
+    background:rgba(255,255,255,0.25);
+    margin:12px auto;
+    padding:15px;
+    border-radius:15px;
+    width:320px;
+    display:none;
+    font-size:18px;
+}
+
+/* GAME */
+#gameArea{
+    position:relative;
+    height:400px;
+    border-radius:25px;
+    overflow:hidden;
+    background:rgba(255,255,255,0.2);
+}
+
+.heart{
+    position:absolute;
+    font-size:30px;
+    cursor:pointer;
+}
+
+/* poem */
+.poem{
+    font-style:italic;
+    max-width:600px;
+    margin:auto;
+    line-height:1.9;
+    font-size:20px;
+}
+
+
+#secretBox{
+    margin-top:30px;
+    display:none;
+    background:rgba(0,0,0,0.3);
+    padding:25px;
+    border-radius:20px;
+    max-width:420px;
+    margin-left:auto;
+    margin-right:auto;
+    font-size:18px;
+}
+
+/* floating hearts */
+.float{
+    position:fixed;
+    bottom:-40px;
+    font-size:24px;
+    animation:floatUp 6s linear infinite;
+    opacity:0.7;
+}
+
+@keyframes floatUp{
+    from{transform:translateY(0)}
+    to{transform:translateY(-110vh)}
+}
+
+#fireworks{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<canvas id="fireworks"></canvas>
+
+<!-- PASSWORD LOCK -->
+<div id="lockScreen">
+<h1>Enter Secret Password ❤️</h1>
+<input type="password" id="passwordInput" placeholder="password">
+<button onclick="checkPassword()">Unlock Surprise</button>
+<button onclick="showHint()">Need a hint? 💡</button>
+<p id="hintText"></p>
+<p id="wrongText"></p>
+</div>
+
+<nav>
+<a href="#letter">Letter</a>
+<a href="#reasons">18 Reasons</a>
+<a href="#game">Game</a>
+<a href="#poem">Poem</a>
+<a href="#music">Music</a>
+</nav>
+
+<section id="letter">
+<div class="card">
+<h1>Happy Birthday!</h1>
+<p style="line-height:1.8;font-size:18px">
+My dearest love,<br><br>
+Today is your day, and I wish I could put into words how much you truly mean to me. You are not just someone I love — you are someone who feels like home. From the smallest moments to the biggest memories, life feels warmer, softer, and brighter with you by my side.<br><br>
+I love the way you exist so naturally in my world, the way your presence alone can calm me, and how your laughter can turn an ordinary day into something unforgettable.<br><br>
+Spent your birthday well and have fun
+</p>
+<button onclick="revealSecret()">Click for secret message 💌</button>
+<div id="secretBox">You are sigma(and old)</div>
+</div>
+</section>
+
+<section id="reasons">
+<div class="card">
+<h1>18 Reasons Why I Love You 💕</h1>
+<button onclick="showReasons()">Reveal Them</button>
+<div class="reason">1. Your smile</div>
+<div class="reason">2. Your kindness</div>
+<div class="reason">3. The way you laugh</div>
+<div class="reason">4. You make me feel safe</div>
+<div class="reason">5. Your sense of humor</div>
+<div class="reason">6. How you support me</div>
+<div class="reason">7. Your advices</div>
+<div class="reason">8. Your voice</div>
+<div class="reason">9. Your intelligence</div>
+<div class="reason">10. Your patience</div>
+<div class="reason">11. You listen to me</div>
+<div class="reason">12. Your dreams</div>
+<div class="reason">13. Your honesty</div>
+<div class="reason">14. Your warmth</div>
+<div class="reason">15. Your energy</div>
+<div class="reason">16. Your heart</div>
+<div class="reason">17. How you love me</div>
+<div class="reason">18. Simply because you are you</div>
+</div>
+</section>
+
+<section id="game">
+<div class="card">
+<h1>Catch My Love 💘</h1>
+<p>Catch 10 hearts!</p>
+<div id="gameArea"></div>
+<p id="scoreText">Score: 0</p>
+</div>
+</section>
+
+<section id="poem">
+<div class="card">
+<h1>A Poem For You 🌙</h1>
+<div class="poem">
+You came into my life without warning,<br>
+Yet quietly became my home.<br><br>
+In your voice I find peace,<br>
+In your smile — my favorite place.<br><br>
+If love had a feeling,<br>
+It would feel like you.
+</div>
+</div>
+</section>
+
+
+<script>
+
+const PASSWORD="mogger";
+const HINT="who i am?";
+
+function checkPassword(){
+ const input=document.getElementById("passwordInput").value;
+ if(input===PASSWORD){
+  document.getElementById("lockScreen").style.display="none";
+  launchFireworks();
+  startFloatingHearts();
+ }
+ else document.getElementById("wrongText").innerText="Wrong password 💔";
+}
+
+function showHint(){
+ document.getElementById("hintText").innerText=HINT;
+}
+
+function revealSecret(){
+ document.getElementById("secretBox").style.display="block";
+}
+
+function showReasons(){
+ document.querySelectorAll(".reason").forEach((r,i)=>{
+  setTimeout(()=>r.style.display="block",i*250);
+ });
+}
+
+/* floating hearts */
+function startFloatingHearts(){
+ setInterval(()=>{
+  const h=document.createElement("div");
+  h.className="float";
+  h.innerHTML="❤️";
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=(20+Math.random()*30)+"px";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+ },500);
+}
+
+/* GAME */
+let score=0;
+const gameArea=document.getElementById("gameArea");
+const scoreText=document.getElementById("scoreText");
+
+function createHeart(){
+ let heart=document.createElement("div");
+ heart.innerHTML="❤️";
+ heart.classList.add("heart");
+ heart.style.left=Math.random()*90+"%";
+ heart.style.top="0px";
+ gameArea.appendChild(heart);
+
+ let fall=setInterval(()=>{
+  heart.style.top=heart.offsetTop+5+"px";
+  if(heart.offsetTop>380){heart.remove();clearInterval(fall);} 
+ },30);
+
+ heart.onclick=()=>{
+  heart.remove();
+  clearInterval(fall);
+  score++;
+  scoreText.innerText="Score: "+score;
+  if(score>=10){alert("You caught all my love ❤️");launchFireworks();}
+ };
+}
+setInterval(createHeart,1000);
+
+/* FIREWORKS */
+const canvas=document.getElementById("fireworks");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+let particles=[];
+
+function launchFireworks(){
+ for(let i=0;i<5;i++)createExplosion();
+}
+
+function createExplosion(){
+ const x=Math.random()*canvas.width;
+ const y=Math.random()*canvas.height/2;
+ for(let i=0;i<80;i++){
+  particles.push({x,y,angle:Math.random()*Math.PI*2,speed:Math.random()*5+2,life:100});
+ }
+}
+
+function animateFireworks(){
+ ctx.clearRect(0,0,canvas.width,canvas.height);
+ particles.forEach((p,i)=>{
+  p.x+=Math.cos(p.angle)*p.speed;
+  p.y+=Math.sin(p.angle)*p.speed;
+  p.life--;
+  ctx.beginPath();
+  ctx.arc(p.x,p.y,2,0,Math.PI*2);
+  ctx.fillStyle="white";
+  ctx.fill();
+  if(p.life<=0)particles.splice(i,1);
+ });
+ requestAnimationFrame(animateFireworks);
+}
+animateFireworks();
+
+</script>
+
+</body>
+</html>
